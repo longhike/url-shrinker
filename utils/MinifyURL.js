@@ -1,21 +1,27 @@
 module.exports = class MinifyURL {
-  base = "http://mi.ni/";
+
   constructor(id, url, alias) {
-    this.url = url;
     this.id = id;
-    this.alias = this.hashAlias(id, alias);
+    this.target_url = url;
+    this.alias = alias
+    this.alias_hash = this.hashAlias(id, alias);
+    this.base = "http://mi.ni/";
+    this.mini_url = this.getMini()
   }
 
   getInfo() {
     return {
       id: this.id,
-      url: this.url,
+      target_url: this.target_url,
       alias: this.alias,
+      alias_hash: this.alias_hash,
+      base: this.base,
+      mini_url: this.mini_url
     };
   }
 
   getMini() {
-    return this.base + this.alias;
+    return this.base + this.alias_hash;
   }
 
   hashAlias(id, alias) {

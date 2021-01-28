@@ -1,6 +1,7 @@
 const target_url = document.getElementById("target-url");
 const target_alias = document.getElementById("target-alias");
 const make_url = document.getElementById("make-url");
+const mini_url_div = document.getElementById("new-url");
 
 make_url.addEventListener("click", function (e) {
   e.preventDefault();
@@ -8,13 +9,23 @@ make_url.addEventListener("click", function (e) {
     url: target_url.value,
     alias: target_alias.value,
   };
-  fetch("/api/test", {
+  fetchAndReturnURL(reqObj)
+    .then((data) => {
+      console.log(data);
+      mini_url_div.textContent = `Your minified URL is: ${data.mini_url}`;
+    })
+    .catch((err) => console.log(err.message));
+});
+
+async function fetchAndReturnURL(obj) {
+  const response = await fetch("/api/minify", {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
     method: "post",
-    body: JSON.stringify(reqObj),
-  })
-  .then(response => console.log(response))
-});
+    body: JSON.stringify(obj),
+  });
+  const url = await response.json();
+  return url;
+}
