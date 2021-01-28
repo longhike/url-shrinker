@@ -12,7 +12,7 @@ make_url.addEventListener("click", function (e) {
   fetchAndReturnURL(reqObj)
     .then((data) => {
       console.log(data);
-      mini_url_div.textContent = `Your minified URL is: ${data.mini_url}`;
+      mini_url_div.textContent = `Your minified URL is: localhost:3001/${data.alias_hash}`;
     })
     .catch((err) => console.log(err.message));
 });
