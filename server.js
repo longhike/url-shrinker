@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(clientRouting);
-app.use("/api", apiRouting);
+app.use(apiRouting);
 
 db.sync().then(() => {
   app.listen(PORT, () => {

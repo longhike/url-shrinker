@@ -1,14 +1,20 @@
 # url-shrinker
 
-a URL minifier written in JavaScript; Node.js/Express back end with a MySQL database, sequelize ORM, and simple hashing method for generating new reference endpoints
+a URL minifier written in JavaScript; Node.js/Express back end with a MySQL database, sequelize ORM, and simple hashing method for generating new redirect endpoints
 
 ## Installation
-To run, clone this package and its [server companion](https://github.com/longhike/url-shrinker-router), and then run ```npm install``` and ```npm start```
+Requires node.js, locally installed and running mysql server, and a connection password to replace the environmental variable (if your machine is set up that way).
+
+To run, clone this package, and then run ```npm install``` and ```npm start``` or ```npm run dev``` to use nodemon.
+
+Then, you have two options:
+1. clone the [companion server](https://github.com/longhike/url-shrinker-router), install dependancies like above and start the server.  
+2. use only this server - go the public/script.js and update the rendered link per the instructions, and then go to routes/api.js and reimpliment the commented out route.
 
 ## Functionality
-When target url and alias are entered, they're added as parameters to a ```MiniURL``` class on the server, which then checks the target url against the database. If the target exists, it'll return the minified url extension that already exists; if not, it'll create a new database entry and return the new extension.
+In this MVP version of the app, when target url and alias are entered, they're checked against the database; if the target exists, it'll return the minified url extension that already exists; if not, a new item will be added the database and a new extension returned. 
 
-You can then go to the minified url in your browser (as long as the companion server is running), which will find the endpoint in the database and then redirect you to the target url.
+You can then go to the minified url in your browser, which will find the endpoint in the database and then redirect you to the target url.
 
 ## License
 
